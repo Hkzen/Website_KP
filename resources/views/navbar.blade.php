@@ -16,6 +16,12 @@
 
         <ul class="navbar-nav ms-auto">
           @auth
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('view.cart') }}">
+                <i class="bi bi-cart"></i> Keranjang 
+                <span class="badge bg-danger">{{ \App\Models\Cart::where('user_id', Auth::id())->count() }}</span>
+            </a>
+        </li>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,14 +40,14 @@
                       </li>
                   </ul>
               </li>
+
+              
           @else 
-              <!-- Login button -->
               <li class="nav-item">
                   <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" href="/login">
                       <i class="bi bi-box-arrow-in-right"></i> LOGIN
                   </a>
               </li>
-              <!-- Register button -->
               <li class="nav-item">
                   <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" href="/register">
                       <i class="bi bi-person-plus"></i> REGISTER

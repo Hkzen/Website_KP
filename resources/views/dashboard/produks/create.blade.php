@@ -9,7 +9,7 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="nama_produk">nama produk</label>
+                    <label for="nama_produk">Nama produk</label>
                     <input type="text" class="form-control @error('nama_produk') is-invalid @enderror"
                     id="nama_produk" name="nama_produk" placeholder="nama produk">
                     @error('nama_produk')
@@ -27,6 +27,15 @@
                     <label for="stok">Stok</label>
                     <input type="text" class="form-control"
                     id="stok" name="stok" placeholder="stok produk">
+                </div>
+                <div class="form-group">
+                    <label for="harga">Harga</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp</span>
+                        </div>
+                        <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga Produk (dalam angka)">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="category">Kategori</label>
@@ -47,7 +56,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="deskripsi_produk">deskripsi produks</label>
+                    <label for="deskripsi_produk">Deskripsi Produk</label>
                     @error('deskripsi_produk')
                         <p class="text-danger">
                             {{ $message }}

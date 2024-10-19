@@ -30,6 +30,15 @@
                 id="stok" name="stok" placeholder="stok produk" value="{{ old('stok', $produk->stok) }}">
             </div>
             <div class="form-group">
+                <label for="harga">Harga</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Rp</span>
+                    </div>
+                    <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga Produk (dalam angka)" value="{{ old('harga', $produk->harga) }}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="category">Kategori</label>
                 <select class="custom-select rounded-0" id="kategori_id" name="kategori_id">
                     @foreach ($kategori as $kategori)

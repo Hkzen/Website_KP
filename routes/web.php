@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProdukFilterController;
 use App\Http\Controllers\DashboardProduksController;
@@ -28,7 +29,6 @@ Route::get('/', function () {
 });
 
 Route::get('/produk', [ProdukController::class, 'index']);
-Route::get('/produkFilter', [ProdukFilterController::class, 'filterProducts']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login',[LoginController::class, 'authenticate']);
@@ -64,3 +64,12 @@ Route::delete('/dashboard/produks/{slug}', [DashboardProduksController::class, '
 Route::get('/dashboard/kategori/checkSlug', [DashboardKategoriController::class, 'checkSlug'])->middleware('auth');
 
 route::resource('/dashboard/kategori', DashboardKategoriController::class)->Middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+    Route::post('/callback', [CheckoutController::class, 'callback'])->name('callback');
+});
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('view.cart');
+Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('remove.from.cart');

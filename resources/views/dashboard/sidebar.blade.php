@@ -22,7 +22,7 @@
             <a href="/dashboard/produks" class="nav-link {{ Request::is('dashboard/produks*')?'active' : '' }}">
                 <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Katalog
+                Katalog Produk
               </p>
             </a>
           </li>

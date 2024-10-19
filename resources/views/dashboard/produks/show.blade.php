@@ -10,6 +10,7 @@
                 <hr style="background-color:white">
                 <p align="justify">{!! $produk->deskripsi_produk !!}</p>
                 <p>Stok Produk : {{ $produk->stok }}</p>
+                <p>Harga Produk : Rp {{ $produk->harga }}</p>
                 <a href="/dashboard/produks" class="btn btn-success">Kembali Ke Katalog Produk</a>
                 <a href="/dashboard/produks/{{ $produk->slug }}/edit" class="btn btn-warning">Edit</a>
                 <form action="/dashboard/produks/{{ $produk->slug }}" method="POST" class="d-inline" style="float: right; clear: both;">

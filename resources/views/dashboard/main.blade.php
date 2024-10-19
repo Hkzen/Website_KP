@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Dashboard</title>
+  <title>Projek | Dashboard</title>
   <!-- Font Awesome Icons -->
-  <link rel="shortcut icon" type="image/x-icon" href="/1.png" />
   <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
 
   <!-- summernote -->
   <link rel="stylesheet" href="/../../plugins/summernote/summernote-bs4.min.css">
   <link rel="shortcut icon" type="image/x-icon" href="/blogo.png" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- DataTables -->
   <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -20,8 +21,6 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
 </head>
-
-
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
@@ -42,9 +41,9 @@
   </div><!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy;2024, Toko Paramonth</strong>
-    
+  <footer class="main-footer" >
+    <strong>Copyright &copy; 2024 - Toko Paramonth</strong>
+    All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> Beta
     </div>
@@ -54,26 +53,6 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script>
- function printCard(element) {
-  var card = element.closest('.card');
-  card.style.display = 'none';
-  window.print();
-  card.style.display = 'block';
-}
-</script>
-<script>
-function printDiv(divName) {
-  var printContents = document.getElementById(divName).innerHTML;
-  var originalContents = document.body.innerHTML;
-
-  document.body.innerHTML = printContents;
-
-  window.print();
-
-  document.body.innerHTML = originalContents;
-}
-</script>
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -90,11 +69,6 @@ function printDiv(divName) {
 <script src="/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="/plugins/chart.js/Chart.min.js"></script>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Summernote -->
 <script src="/../../plugins/summernote/summernote-bs4.min.js"></script>
@@ -142,7 +116,5 @@ function printDiv(divName) {
       });
     });
   </script>
-
-
 </body>
 </html>

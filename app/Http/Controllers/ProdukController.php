@@ -25,29 +25,11 @@ class ProdukController extends Controller
      * Show the form for creating a new resource.
      */
 
-     public function filterProducts(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $produks = DB::table('produks')
-                    ->where('nama_produk', 'like', '%' . $keyword . '%')
-                    ->get();
-
-                    $log = 'KeLoginPage';
-        if ($keyword->$log) {
-            return view('login');
-        }
-        
-        if ($produks->isEmpty()) {
-            return view('produkFilter', ['message' => 'No products found.']);
-        } else {
-            return view('produkFilter', ['produks' => $produks], ['keyword' => $keyword]);
-        }
-    }
-
     public function create()
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.

@@ -10,6 +10,12 @@
             </div>
             @endif
 
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
             @if (session()->has('loginError'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('loginError') }}
@@ -18,7 +24,7 @@
             @endif
 
                 <main class="form-signin">
-                    <h1 class="h3 mb-3 fw-normal">#Form Login#</h1>
+                    <h1 class="h3 mb-3 fw-normal"><strong>Form Login</strong></h1>
                     <form action="/login" method="POST">
                         @csrf
                         <div class="form-floating">
@@ -36,7 +42,7 @@
                             placeholder="Password" required>
                             <label for="password">Password</label>
                         </div>
-                        <button class="w-100 btn btn-lg btn-succes mt-3" type="submit">Login</button>
+                        <button class="w-100 btn btn-lg btn-warning mt-3" type="submit">Login</button>
                     </form>
                     <small class="d-block text-center mt-3 mb-4">Belum registrasi?<a href="/register">
                     Register Sekarang !!</a></small>
