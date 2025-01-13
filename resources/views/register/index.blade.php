@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-5 mb-5">
         <main class="form-registration">
-            <h1 class="h3 mb-3 fw-normal">#Form Registrasi#</h1>
+            <h1 class="h3 mb-3 fw-normal"><strong> Registrasi</strong></h1>
             <form action="/register" method="POST">
                 @csrf
                 <div class="form-floating">
@@ -47,7 +47,7 @@
                         </div>
                     @enderror
                 </div>
-                <button class="w-100 btn btn-lg btn-succes mt-3" type="submit">Register</button>
+                <button class="w-100 btn btn-lg btn-warning mt-3" type="submit">Register</button>
             </form>
             <small class="d-block text-center mt-3 mb-4">Sudah Registrasi?<a href="/login">
             Login Now !!!!!!</a></small>

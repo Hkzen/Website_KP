@@ -85,7 +85,7 @@
                     productList.innerHTML = ''; // Mengosongkan daftar produk sebelumnya
 
                     if (data.length === 0) {
-                        productList.innerHTML = '<tr><td colspan="7">No products found.</td></tr>';
+                        productList.innerHTML = '<tr><td colspan="7">Produk Tidak Ditemukan.</td></tr>';
                     } else {
                         data.forEach((product, index) => {
                             productList.innerHTML += `

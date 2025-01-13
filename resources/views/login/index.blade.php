@@ -24,7 +24,7 @@
             @endif
 
                 <main class="form-signin">
-                    <h1 class="h3 mb-3 fw-normal"><strong>Form Login</strong></h1>
+                    <h1 class="h3 mb-3 fw-normal"><strong> Login</strong></h1>
                     <form action="/login" method="POST">
                         @csrf
                         <div class="form-floating">

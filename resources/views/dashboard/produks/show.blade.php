@@ -8,7 +8,8 @@
                 margin-left: auto;
                 margin-right: auto;">
                 <hr style="background-color:white">
-                <p align="justify">{!! $produk->deskripsi_produk !!}</p>
+                <p align="justify">{!! $produk->deskripsi_produk !!}</p><br>
+                <p>Kategori Produk : {{ $produk->kategori->nama }}</p>
                 <p>Stok Produk : {{ $produk->stok }}</p>
                 <p>Harga Produk : Rp {{ $produk->harga }}</p>
                 <a href="/dashboard/produks" class="btn btn-success">Kembali Ke Katalog Produk</a>

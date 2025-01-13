@@ -29,8 +29,9 @@ class RegisterController extends Controller
             'username'=>'required|min:3|max:255|unique:users',
             'email'=>'email:dns|unique:users',
             'password'=>'required|min:5|max:255',
-            'role' => 'user', // Assign 'user' role by default
+             // Assign 'user' role by default
         ]);
+        $validatedData['role'] = $request->role ?? 'user';
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);
         return redirect('/login')->with('sukses', 'Registrasi Berhasil, Silahkan Login !!');

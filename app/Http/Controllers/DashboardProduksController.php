@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\produk;
-use App\Models\produks;
 use App\Models\kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -57,23 +56,6 @@ class DashboardProduksController extends Controller
         return redirect('/dashboard/produks')->with('sukses', 'produk Baru Berhasil Ditambahkan!');
     }
 
-    
-    public function filterProducts(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        if ($keyword) {
-           $produk = Produk::where('nama_produk', 'like', '%' . $keyword . '%')->get();
-        } else {
-           $produk = Produk::all();
-        }
-
-
-        if ($produk->isEmpty()) {
-            return view('dashboard.produks.produksFilter', ['message' => 'No products found.']);
-        } else {
-            return view('dashboard.produks.produksFilter', ['produk' => $produk], ['keyword' => $keyword]);
-        }
-    }
     
     public function show(produk $produk)
     {

@@ -28,9 +28,17 @@
           </li>
           <li class="nav-item">
             <a href="/dashboard/kategori" class="nav-link {{ Request::is('dashboard/kategori*')?'active' : '' }}">
-                <i class="nav-icon fas fa-file-alt"></i>
+                <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Kategori Produk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard/user" class="nav-link {{ Request::is('dashboard/user*')?'active' : '' }}">
+                <i class="nav-icon fas fa-user-alt"></i>
+              <p>
+                User
               </p>
             </a>
           </li>

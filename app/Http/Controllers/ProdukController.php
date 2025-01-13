@@ -25,9 +25,14 @@ class ProdukController extends Controller
      * Show the form for creating a new resource.
      */
 
-    public function create()
+    public function home(produk $produk)
     {
-        //
+        $latestProducts = produk::orderBy('created_at', 'desc')->take(3)->get();
+    
+        return view('home', [
+            'title' => 'Home',
+            'produk' => $latestProducts // kirim data produk terbaru
+        ]);
     }
 
 

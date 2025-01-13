@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('gross_amount');
             $table->string('status');
             $table->string('payment_type');
+            $table->json('item_details')->default(json_encode([]));
             $table->timestamps();
         });
         

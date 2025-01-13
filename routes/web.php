@@ -6,7 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ProdukFilterController;
+use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\DashboardProduksController;
 use App\Http\Controllers\DashboardKategoriController;
 use App\Http\Controllers\DashboardProduksFilterController;
@@ -22,13 +22,15 @@ use App\Http\Controllers\DashboardProduksFilterController;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
+Route::get('/', [ProdukController::class, 'home'])->name('home');
+
+Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+Route::get('/home', [ProdukController::class, 'home'])->name('home');
+Route::get('/about', function () {
+    return view('about', [
+        "title" => "About"
     ]);
 });
-
-Route::get('/produk', [ProdukController::class, 'index']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login',[LoginController::class, 'authenticate']);
@@ -47,15 +49,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        return view('home');
-    });
-});
-
 Route::get('/dashboard/produks/checkSlug', [DashboardProduksController::class , 'checkSlug'])->middleware('auth');
 route::resource('/dashboard/produks', DashboardProduksController::class)->Middleware('auth');
-Route::get('/dashboard/produksFilter', [DashboardProduksFilterController::class, 'filterProducts']);
 
 Route::get('/dashboard/produks/{produk:slug}/edit', [DashboardProduksController::class, 'edit'])->middleware('auth')->name('produks.edit');
 Route::put('/dashboard/produks/{produk:slug}', [DashboardProduksController::class, 'update'])->middleware('auth')->name('produks.update');
@@ -65,11 +60,16 @@ Route::get('/dashboard/kategori/checkSlug', [DashboardKategoriController::class,
 
 route::resource('/dashboard/kategori', DashboardKategoriController::class)->Middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-    Route::post('/callback', [CheckoutController::class, 'callback'])->name('callback');
-});
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->middleware('auth');
+Route::post('/checkout/callback', [CheckoutController::class, 'callback'])->name('checkout.callback');
 
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('view.cart');
 Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('remove.from.cart');
+
+Route::get('/history', [CheckoutController::class, 'transactionHistory'])->name('transaction.history')->middleware('auth');
+
+Route::resource('/dashboard/user', UserDashboardController::class)->middleware('auth');
+Route::get('/dashboard/user/{user:id}/edit', [UserDashboardController::class, 'edit'])->middleware('auth')->name('user.edit');
+Route::put('/dashboard/user/{user:id}', [UserDashboardController::class, 'update'])->middleware('auth')->name('user.update');

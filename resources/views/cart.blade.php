@@ -10,14 +10,16 @@
 @endif
 
 @if($cartItems->isEmpty())
-        <p>Keranjang Anda kosong.</p>
+        <div class="container text-center pt-2">
+            <h2 style="color: grey">Keranjang Anda Kosong</h2>
+        </div>
 @else
 <table class="table">
     <thead>
         <tr>
             <th>Produk</th>
             <th>Jumlah</th>
-            <th>Total Harga</th>
+            <th>Harga</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -39,7 +41,7 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-between">
-    <h4>Total: Rp {{ number_format($total, 0, ',', '.') }}</h4>
+    <h4>Total Harga: Rp {{ number_format($total, 0, ',', '.') }}</h4>
     <a href="{{ route('checkout') }}" class="btn btn-primary">Bayar</a>
 </div>
 @endif

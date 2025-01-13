@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="nama_produk">Nama produk</label>
                     <input type="text" class="form-control @error('nama_produk') is-invalid @enderror"
-                    id="nama_produk" name="nama_produk" placeholder="nama produk">
+                    id="nama_produk" name="nama_produk" placeholder="Nama produk">
                     @error('nama_produk')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="stok">Stok</label>
                     <input type="text" class="form-control"
-                    id="stok" name="stok" placeholder="stok produk">
+                    id="stok" name="stok" placeholder="Stok produk">
                 </div>
                 <div class="form-group">
                     <label for="harga">Harga</label>

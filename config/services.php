@@ -31,4 +31,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'midtrans' => [
+        'serverKey' => env('MIDTRANS_SERVER_KEY'),
+        'clientKey' => env('MIDTRANS_CLIENT_KEY'),
+        'isProduction' => false, // Pastikan 'false' untuk sandbox
+        'isSanitized' => true,
+        'is3ds' => true,                                
+    ],
+
+
+
 ];
