@@ -1,26 +1,18 @@
 @extends('main')
 @section('container')
-    <section>
-      <div class="container-fluid px-0 ">
-        <!-- Carousel Section -->
-        <div id="carouselExampleControls" class="carousel slide mb-4 shadow" data-bs-ride="carousel" style="width:99.44vmax; margin-left: calc(-50vw + 50%); margin-top: -24px;">
-          <div class="carousel-inner" style="height: 87vh;">
-            <div class="carousel-item active">
-              <img src="R.jpeg" class="d-block w-100" alt="..." style="filter:opacity(0.8); height: 100vh; width: 100%; object-fit: cover;">
-            </div>
-            <div class="carousel-item">
-              <img src="headphone.webp" class="d-block w-100" alt="..." style="filter:opacity(0.8); height: 100vh; width: 100%; object-fit: cover;">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="top: 50%;transform: translateY(-50%);">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="top: 50%;transform: translateY(-50%);">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>        
+<section>
+  <section id="hero" class="hero section light-background">
+  <div class="container">
+<div class="row gy-4">
+<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+    <h1 style="color: blue;">Selamat datang di <span>Toko Paramonth</span></h1>
+    <p>Kami menyediakan barang-barang elektronik lengkap dan terjamin</p>
+    <div class="d-flex">
+    </div>
+</div>
+</div>
+  </div>
+  </section>    
 
         <div class="container text-center py-5">
           <h2 class="mb-4">Fitur</h2>
