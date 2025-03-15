@@ -15,6 +15,7 @@
             <a href="/dashboard/user/create" class="btn btn-outline-warning mb-3">Tambah User</a>
 
             <!-- Tabel Produk -->
+            <div class="table-responsive">
             <table id="productTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -46,6 +47,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 @endsection

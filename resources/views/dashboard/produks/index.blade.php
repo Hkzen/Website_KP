@@ -1,30 +1,28 @@
 @extends('dashboard.main')
+
 @section('container')
-    <div class="content-header">
-        <div class="container-fluid">           
-            <div class="col-sm-12">
-                <h1 class="m-0">Katalog Produk</h1>
-            </div>  
-        </div>
-        <div class="card-body" style="margin-bottom: 50px;">
-            @if (session()->has('sukses'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('sukses') }}
-                </div>
-            @endif  
-            <!-- Form pencarian -->
-            <form id="searchForm" style="margin-bottom: 15px;" method="get">
-                @csrf
-                <label for="keyword">Cari nama produk : </label>
-                <input type="text" id="keyword" name="keyword" placeholder="Masukkan nama produk" style="width: 10cm;">
-                <button type="submit" class="btn btn-warning" style="position: relative;">Cari</button>
-            </form>
+<section class="p-2">
+    <div class="container-fluid">
+        <h1 class="m-0">Katalog Produk</h1>
+        @if (session()->has('sukses'))
+            <div class="alert alert-success" role="alert">
+                {{ session('sukses') }}
+            </div>
+        @endif  
+        <!-- Form pencarian -->
+        <form id="searchForm" class="mb-3" method="get">
+            @csrf
+            <label for="keyword">Cari nama produk : </label>
+            <input type="text" id="keyword" name="keyword" class="form-control d-inline-block" style="width: 300px;" placeholder="Masukkan nama produk">
+            <button type="submit" class="btn btn-warning">Cari</button>
+        </form>
 
-            <a href="/dashboard/produks/create" class="btn btn-outline-warning mb-3">Tambah produk</a>
+        <a href="/dashboard/produks/create" class="btn btn-outline-warning mb-3">Tambah produk</a>
 
-            <!-- Tabel Produk -->
+        <!-- Tabel Produk -->
+        <div class="table-responsive">
             <table id="productTable" class="table table-bordered table-hover">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>No</th>
                         <th>Nama Produk</th>
@@ -41,9 +39,9 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $produk->nama_produk }}</td>
                         <td>{{ $produk->kategori->nama }}</td>
-                        <td style="text-align: center;">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
-                        <td style="text-align: center;">{{ $produk->stok }}</td>
-                        <td style="text-align: center;"><img style="max-width: 5cm; max-height: 5cm;" src="{{ asset('storage/' . $produk->foto_produk) }}"></td>
+                        <td class="text-center">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
+                        <td class="text-center">{{ $produk->stok }}</td>
+                        <td class="text-center"><img class="img-fluid" style="max-width: 100px;" src="{{ asset('storage/' . $produk->foto_produk) }}"></td>
                         <td>
                             <a href="/dashboard/produks/{{ $produk->slug }}" class="btn btn-info"><i class="far fa-eye nav-icon"></i></a>
                             <a href="/dashboard/produks/{{ $produk->slug }}/edit" class="btn btn-warning"><i class="far fa-edit nav-icon"></i></a>
@@ -59,11 +57,11 @@
             </table>
         </div>
     </div>
+</section>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Pastikan script ini berada di bawah elemen HTML yang didefinisikan
     document.addEventListener('DOMContentLoaded', () => {
         const searchForm = document.getElementById('searchForm');
 
@@ -93,9 +91,9 @@
                                     <td>${index + 1}</td>
                                     <td>${product.nama_produk}</td>
                                     <td>${product.kategori_nama || 'N/A'}</td>
-                                    <td style="text-align: center;">Rp ${new Intl.NumberFormat().format(product.harga)}</td>
-                                    <td style="text-align: center;">${product.stok}</td>
-                                    <td style="text-align: center;"><img style="max-width: 5cm; max-height: 5cm;" src="/storage/${product.foto_produk}" /></td>
+                                    <td class="text-center">Rp ${new Intl.NumberFormat().format(product.harga)}</td>
+                                    <td class="text-center">${product.stok}</td>
+                                    <td class="text-center"><img class="img-fluid" style="max-width: 100px;" src="/storage/${product.foto_produk}" /></td>
                                     <td>
                                         <a href="/dashboard/produks/${product.slug}" class="btn btn-info"><i class="far fa-eye nav-icon"></i></a>
                                         <a href="/dashboard/produks/${product.slug}/edit" class="btn btn-warning"><i class="far fa-edit nav-icon"></i></a>

@@ -20,6 +20,21 @@
   <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+
+  <style>
+    .content-wrapper {
+        min-height: calc(100vh - 60px); /* Adjust based on your footer height */
+        padding-bottom: 60px; /* Adjust based on your footer height */
+    }
+    .main-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 60px; /* Adjust based on your footer height */
+        background-color: #f1f1f1;
+        z-index: 1000;
+    }
+  </style>
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">

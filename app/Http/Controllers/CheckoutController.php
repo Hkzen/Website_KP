@@ -229,7 +229,7 @@ class CheckoutController extends Controller
     }
 
     public function transactionHistory() {
-        $transactions = Transaction::where('user_id', Auth::id())->orderBy('created_at')->get();  
+        $transactions = Transaction::where('user_id', Auth::id())->orderBy('created_at')->paginate(10);  
 
         if ($transactions->isEmpty()) {
             Log::info('Tidak ada transaksi untuk pengguna dengan ID: ' . Auth::id());
