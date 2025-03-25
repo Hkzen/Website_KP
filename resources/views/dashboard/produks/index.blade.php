@@ -20,8 +20,8 @@
         <a href="/dashboard/produks/create" class="btn btn-outline-warning mb-3">Tambah produk</a>
 
         <!-- Tabel Produk -->
-        <div class="table-responsive">
-            <table id="productTable" class="table table-bordered table-hover">
+        <div class="table-responsive mb-5">
+            <table id="example2" class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>No</th>
