@@ -25,6 +25,7 @@ use App\Http\Controllers\DashboardProduksFilterController;
 Route::get('/', [ProdukController::class, 'home'])->name('home');
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
 Route::get('/home', [ProdukController::class, 'home'])->name('home');
 Route::get('/about', function () {
     return view('about', [

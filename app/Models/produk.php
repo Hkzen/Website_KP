@@ -34,4 +34,10 @@ class produk extends Model
         $this->stok -= $quantity;
         $this->save();
     }
+
+    public function Review()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }

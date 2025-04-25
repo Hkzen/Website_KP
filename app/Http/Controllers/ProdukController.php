@@ -47,10 +47,12 @@ class ProdukController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(produk $produk)
+    public function show($id)
     {
-        
+        $produk = Produk::findOrFail($id); // Assuming 'Produk' is your model
+        return view('produkDetail', compact('produk'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

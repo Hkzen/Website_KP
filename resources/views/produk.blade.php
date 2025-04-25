@@ -32,8 +32,7 @@
                             </h5>
                             <p style="word-wrap: break-word;">{{ $deskripsi->excerpt }}</p>
                             <div class="text-end">
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#detailModal{{ $deskripsi->id }}" 
-                                style="position: absolute; bottom: 0; right: 0; width: 120px; height: 32px; font-size:14px;">Detail Produk</button>
+                                <a href="{{ route('produk.show', $deskripsi->id) }}" class="btn btn-primary" style="position: absolute; bottom: 0; right: 0; width: 120px; height: 32px; font-size:14px;">Detail Produk</a>
                             </div>
                         </div>
                     </div>
