@@ -49,11 +49,28 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $produk = Produk::findOrFail($id); // Assuming 'Produk' is your model
-        return view('produkDetail', compact('produk'));
+        $produk = produk::with('review.user')->findOrFail($id);
+        
+        $averageRating = $produk->review()->avg('rating');
+
+        return view('produkDetail', compact('produk', 'averageRating'));
     }
 
 
+    public function loadMoreReviews(Request $request, $id)
+{
+    $produk = produk::findOrFail($id);
+
+    // Fetch the next set of reviews (e.g., 5 per page)
+    $reviews = $produk->review()
+        ->with('user')
+        ->latest()
+        ->skip($request->get('offset', 0))
+        ->take(5)
+        ->get();
+
+    return response()->json($reviews);
+}
     /**
      * Show the form for editing the specified resource.
      */

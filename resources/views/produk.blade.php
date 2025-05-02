@@ -4,11 +4,9 @@
     <section class="p-3">
         <div class="container">
           <div class="row">
-            <form id="searchForm" style="margin-bottom: 15px; display: flex; align-items: center;"> 
-                <label for="keyword" style="margin-right: 10px;">Cari nama produk: </label> 
-                <input type="text" id="keyword" name="keyword" placeholder="Masukkan nama produk" style="width: 67vw; padding: 5px; margin-right: 10px;"> 
-                <button type="submit" class="btn btn-primary" style="background-color: rgb(86, 91, 227); border: none; padding: 5px 10px; cursor: pointer; 
-                color: #f8f8f8; font-size: 15px; position: relative;">Cari</button>
+            <form id="searchForm" class="d-flex mb-3">
+                <input type="text" id="keyword" name="keyword" class="form-control me-2" placeholder="Cari Produk...">
+                <button type="submit" class="btn btn-primary">Cari</button>
             </form>
               @if(session('error'))
               <div class="alert alert-danger">
@@ -31,61 +29,14 @@
                                 style="color: rgb(86, 91, 227);">{{ $deskripsi->nama_produk }}</a>
                             </h5>
                             <p style="word-wrap: break-word;">{{ $deskripsi->excerpt }}</p>
-                            <div class="text-end">
-                                <a href="{{ route('produk.show', $deskripsi->id) }}" class="btn btn-primary" style="position: absolute; bottom: 0; right: 0; width: 120px; height: 32px; font-size:14px;">Detail Produk</a>
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('produk.show', $deskripsi->id) }}" class="btn btn-primary">Detail Produk</a>
                             </div>
                         </div>
                     </div>
               </div>
-
-             <div class="modal fade" id="detailModal{{ $deskripsi->id }}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel{{ $deskripsi->id }}" 
-                aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                   <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="detailModalLabel{{ $deskripsi->id }}">{{ $deskripsi->nama_produk }}</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body" style="max-height:400px; overflow-y: auto; ">
-                          <div class="row">
-                              <div class="col-md-4" >
-                                  <img src="{{ asset('storage/' . $deskripsi->foto_produk) }}" class="img-fluid" alt="{{ $deskripsi->nama_produk }}" 
-                                  style="position: sticky; top: 0;">
-                              </div>
-                              <div class="col-md-8">
-                                  <h5 >Deskripsi Produk</h5>
-                                  <p style="word-wrap: break-word; overflow-wrap: break-word;">{!! $deskripsi->deskripsi_produk !!}</p>
-                                  <p><strong>Harga: </strong>Rp {{ number_format($deskripsi->harga, 0, ',', '.') }}</p>
-                                  @if ($deskripsi->stok == 0)
-                                  <p><strong>Stok: </strong> Stok Habis</p>
-                                  @else
-                                  <p><strong>Stok: </strong>{{ $deskripsi->stok }}</p>
-                                  @endif
-                              </div>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                        <form action="{{ route('add.to.cart') }}" method="POST">
-                          @csrf
-                          <input type="hidden" name="produk_id" value="{{ $deskripsi->id }}">
-                          <input type="number" name="quantity" value="1" min="1" max="{{ $deskripsi->stok }}">
-                          <button class="btn btn-success" type="submit">Tambah ke Keranjang</button>
-                        </form>
-                        
-                        <!-- Beli Sekarang form -->
-                        <form action="{{ route('checkout') }}" method="GET">
-                          <input type="hidden" name="produk_id" value="{{ $deskripsi->id }}">
-                          <input type="number" name="quantity" value="1" min="1" max="{{ $deskripsi->stok }}">
-                          <button class="btn btn-primary" type="submit">Beli Sekarang</button>
-                        </form>
-                      </div>
-                  </div>
-              </div>
+            @endforeach
             </div>
-           @endforeach
-              </div>
         </div>
         </div>
     </section>
