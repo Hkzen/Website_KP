@@ -1,4 +1,3 @@
-// server.cjs
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
@@ -17,42 +16,60 @@ const db = mysql.createConnection({
 
 // Endpoint for searching products
 app.get('/search', (req, res) => {
-    const keyword = req.query.keyword;
-    const sql = `SELECT * FROM produks WHERE nama_produk LIKE ?`;
+    const keyword = req.query.keyword || ''; // Search keyword
+    const page = parseInt(req.query.page) || 1; // Current page
+    const limit = 6; // Number of products per page
+    const offset = (page - 1) * limit; // Calculate offset
 
-    db.query(sql, [`%${keyword}%`], (err, result) => {
-        if (err) {
-            console.error("Database query error:", err); // Log the error
-            return res.status(500).send('Database error'); // Send a 500 response
-        }
-        if (result.length === 0) {
-            return res.send({ message: 'No products found.' });
-        }
-        res.send(result);
-    });
-});
-
-// Endpoint for searching products with categories
-app.get('/dashboard/produks/search', (req, res) => {
-    const keyword = req.query.keyword; // Fetch the keyword from query parameters
     const sql = `
-        SELECT p.*, k.nama AS kategori_nama 
+        SELECT 
+            p.*,
+            COALESCE(AVG(pr.rating), 0) as avg_rating,
+            COUNT(pr.id) as comment_count,
+            (COALESCE(AVG(pr.rating), 0) * 0.7 + COUNT(pr.id) * 0.3) as weight
         FROM produks p
-        LEFT JOIN kategoris k ON p.kategori_id = k.id 
-        WHERE p.nama_produk LIKE ?`;
+        LEFT JOIN product_review pr ON p.id = pr.produk_id
+        WHERE p.nama_produk LIKE ? OR p.deskripsi_produk LIKE ?
+        GROUP BY p.id
+        ORDER BY weight DESC
+        LIMIT ? OFFSET ?
+    `;
 
-    // Perform the database query
-    db.query(sql, [`%${keyword}%`], (error, result) => {
-        if (error) {
-            console.error("Database query error:", error); // Log the error
-            return res.status(500).send('Internal Server Error'); // Send a 500 response
+    db.query(sql, [`%${keyword}%`, `%${keyword}%`, limit, offset], (err, result) => {
+        if (err) {
+            console.error("Database query error:", err);
+            return res.status(500).json({ html: '<p class="text-danger">Error sistem</p>', hasMore: false });
         }
-        
-        // Send the result as a JSON response
+
         if (result.length === 0) {
-            return res.send([]); // No results found
+            return res.json({ html: '<p class="text-muted">Produk tidak ditemukan</p>', hasMore: false }); // No products found
         }
-        res.send(result); // Send the results back to the client
+
+        const html = result.map(product => `
+            <div class="col-md-4 mb-3">
+                <div class="card h-100" style="border-color:rgb(86, 91, 227); border-width: 5px; box-shadow: rgba(86, 91, 227, 0.355) 0px 4px 8px 0px;">
+                    <img src="/storage/${product.foto_produk}" class="card-img-top" alt="${product.nama_produk}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="/produk/${product.id}" style="color: rgb(86, 91, 227);">
+                                ${product.nama_produk}
+                            </a>
+                        </h5>
+                        <p>${product.excerpt || ''}</p>
+                        <p>
+                            <strong>Rating: </strong>
+                            ${Array.from({ length: 5 }, (_, i) => 
+                                i < Math.floor(product.avg_rating) ? 
+                                '★' : '☆'
+                            ).join('')}
+                            (${product.avg_rating.toFixed(1)})
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        res.json({ html, hasMore: result.length === limit }); // Check if there are more products
     });
 });
 

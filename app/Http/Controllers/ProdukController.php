@@ -13,13 +13,15 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('produk', [
-            "title" => "Produk",
-            "produk" => produk::all()
-        ]);
-    }
+
+     public function index(Request $request)
+     {
+        $produk = Produk::with(['review'])
+        ->orderBy('created_at', 'desc') // Ensure consistent ordering
+        ->paginate(6); // Paginate 6 products per page
+
+        return view('produk', compact('produk'));
+     }
 
     /**
      * Show the form for creating a new resource.
