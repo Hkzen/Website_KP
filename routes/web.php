@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserDashboardController;
@@ -32,6 +33,11 @@ Route::get('/about', function () {
     return view('about', [
         "title" => "About"
     ]);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/review', [ReviewController::class, 'index'])->name('review.index');
+    Route::post('/review/{produkId}', [ReviewController::class, 'store'])->name('review.store');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

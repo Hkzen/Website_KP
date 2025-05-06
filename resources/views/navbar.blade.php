@@ -22,6 +22,11 @@
       <ul class="navbar-nav ms-auto">
         @auth
         <li class="nav-item">
+          <a class="btn btn-primary" href="/review" style="background-color: rgb(86, 91, 227); border: none;">
+              Add Review
+          </a>
+      </li>
+        <li class="nav-item">
           <a class="nav-link text-white" href="{{ route('view.cart') }}">
               <i class="bi bi-cart"></i> Keranjang 
               <span class="badge bg-danger" style="margin-left: 5px; padding: 5px 10px;">{{ \App\Models\Cart::where('user_id', Auth::id())->count() }}</span>

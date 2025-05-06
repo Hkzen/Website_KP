@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Midtrans\Transaction;
+use Midtrans\Transaction as MidtransTransaction;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,9 +52,19 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
+   
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(MidtransTransaction::class);
+    }
+
+    public function purchasedProducts()
+    {
+        $products = [];
+        foreach ($this->transactions as $transaction) {
+            $products = array_merge($products, $transaction->products);
+        }
+        return collect($products);
     }
 
 }

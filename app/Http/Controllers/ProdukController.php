@@ -60,19 +60,19 @@ class ProdukController extends Controller
 
 
     public function loadMoreReviews(Request $request, $id)
-{
-    $produk = produk::findOrFail($id);
+    {
+        $produk = produk::findOrFail($id);
 
-    // Fetch the next set of reviews (e.g., 5 per page)
-    $reviews = $produk->review()
-        ->with('user')
-        ->latest()
-        ->skip($request->get('offset', 0))
-        ->take(5)
-        ->get();
+        // Fetch the next set of reviews (e.g., 5 per page)
+        $reviews = $produk->review()
+            ->with('user')
+            ->latest()
+            ->skip($request->get('offset', 0))
+            ->take(5)
+            ->get();
 
-    return response()->json($reviews);
-}
+        return response()->json($reviews);
+    }
     /**
      * Show the form for editing the specified resource.
      */

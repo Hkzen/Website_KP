@@ -42,37 +42,17 @@ app.get('/search', (req, res) => {
         }
 
         if (result.length === 0) {
-            return res.json({ html: '<p class="text-muted">Produk tidak ditemukan</p>', hasMore: false }); // No products found
+            return res.json({ products: [], hasMore: false, currentPage: page, keyword: keyword });
         }
 
-        const html = result.map(product => `
-            <div class="col-md-4 mb-3">
-                <div class="card h-100" style="border-color:rgb(86, 91, 227); border-width: 5px; box-shadow: rgba(86, 91, 227, 0.355) 0px 4px 8px 0px;">
-                    <img src="/storage/${product.foto_produk}" class="card-img-top" alt="${product.nama_produk}">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="/produk/${product.id}" style="color: rgb(86, 91, 227);">
-                                ${product.nama_produk}
-                            </a>
-                        </h5>
-                        <p>${product.excerpt || ''}</p>
-                        <p>
-                            <strong>Rating: </strong>
-                            ${Array.from({ length: 5 }, (_, i) => 
-                                i < Math.floor(product.avg_rating) ? 
-                                '★' : '☆'
-                            ).join('')}
-                            (${product.avg_rating.toFixed(1)})
-                        </p>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-        res.json({ html, hasMore: result.length === limit }); // Check if there are more products
+        res.json({
+            products: result,
+            hasMore: result.length === limit,
+            currentPage: page,
+            keyword: keyword
+        });
     });
 });
-
 // Start the server
 app.listen(3000, () => {
     console.log('Server is running at port 3000');

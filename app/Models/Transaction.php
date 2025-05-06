@@ -27,4 +27,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function getProductsAttribute()
+    {
+        return json_decode($this->item_details, true) ?? [];
+    }
 }
