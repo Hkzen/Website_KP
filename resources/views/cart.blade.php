@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('container')
-<h1>Keranjang Belanja</h1>
+<h1 class="text-center mb-4" style="font-weight: bold; color: rgb(86, 91, 227);">Keranjang Belanja</h1>
 
 @if(session('success'))
     <div class="alert alert-success">

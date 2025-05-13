@@ -22,8 +22,18 @@
       <ul class="navbar-nav ms-auto">
         @auth
         <li class="nav-item">
-          <a class="btn btn-primary" href="/review" style="background-color: rgb(86, 91, 227); border: none;">
-              Add Review
+          <a class="nav-link text-white" href="/review">
+              <i class="bi bi-pencil-square"></i> Beri Review
+              @auth
+                  @php
+                      $reviewCount = auth()->user()->reviewableProductsCount();
+                  @endphp
+                  @if($reviewCount > 0)
+                      <span class="badge bg-danger" style="margin-left: 5px; padding: 5px 10px;">
+                          {{ $reviewCount }}
+                      </span>
+                  @endif
+              @endauth
           </a>
       </li>
         <li class="nav-item">

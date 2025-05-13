@@ -37,7 +37,7 @@ class ReviewController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->back()->with('success', 'Your comment has been added!');
+        return redirect('review')->with('success', 'Your comment has been added!');
     }
 
 }

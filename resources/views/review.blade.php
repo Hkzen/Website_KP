@@ -7,11 +7,16 @@
         @if($products->isEmpty())
             <p class="text-center">You have no products to review.</p>
         @else
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
             <div class="row g-4">
                 @foreach($products as $product)
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="card h-100 shadow-sm" style="border: 2px solid rgb(86, 91, 227); border-radius: 10px;">
-                            <img src="{{ asset('storage/' . $product['foto_produk']) }}" class="card-img-top img-fluid" alt="{{ $product['name'] }}" style="max-height: 200px; object-fit: cover;">
+                            
                             <div class="card-body">
                                 <h5 class="card-title text-center" style="color: rgb(86, 91, 227); font-weight: bold;">
                                     {{ $product['name'] }}

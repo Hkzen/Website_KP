@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Transaction;
 use Midtrans\Transaction as MidtransTransaction;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -55,7 +56,7 @@ class User extends Authenticatable
    
     public function transactions()
     {
-        return $this->hasMany(MidtransTransaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     public function purchasedProducts()
@@ -67,4 +68,18 @@ class User extends Authenticatable
         return collect($products);
     }
 
+
+
+    public function reviewableProductsCount()
+    {
+        $purchasedProducts = $this->purchasedProducts();
+
+        $productsToReview = $purchasedProducts->filter(function ($product) {
+            return !Review::where('produk_id', $product['id'])
+                ->where('user_id', $this->id)
+                ->exists();
+        });
+
+        return $productsToReview->count();
+    }
 }
