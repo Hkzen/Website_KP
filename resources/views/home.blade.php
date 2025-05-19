@@ -2,17 +2,21 @@
 @section('container')
 <section>
   <section id="hero" class="hero section light-background">
-  <div class="container">
-<div class="row gy-4">
-<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-    <h1 style="color: blue;">Selamat datang di <span>Toko Paramonth</span></h1>
-    <p>Kami menyediakan barang-barang elektronik lengkap dan terjamin</p>
-    <div class="d-flex">
+    <div class="container">
+      <div class="row justify-content-center align-items-center" style="min-height: 400px;">
+        <div class="col-lg-8 text-center" data-aos="zoom-out">
+          <div class="hero-content p-4 rounded">
+            <h1>
+              Selamat datang di <span>Toko Paramonth</span>
+            </h1>
+            <p>
+              Kami menyediakan barang-barang elektronik lengkap dan terjamin
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-  </div>
-  </section>    
+  </section>
 
         <div class="container text-center py-5">
           <h2 class="mb-4">Fitur</h2>

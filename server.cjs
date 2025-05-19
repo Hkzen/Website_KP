@@ -53,6 +53,32 @@ app.get('/search', (req, res) => {
         });
     });
 });
+
+app.get('/dashboard/produks/search', (req, res) => {
+    const keyword = req.query.keyword || '';
+    const sql = `
+        SELECT 
+            p.nama_produk, 
+            k.nama AS kategori_nama, 
+            p.harga, 
+            p.stok, 
+            p.foto_produk, 
+            p.slug
+        FROM produks p
+        LEFT JOIN kategoris k ON p.kategori_id = k.id
+        WHERE p.nama_produk LIKE ? OR k.nama LIKE ?
+    `;
+    const param = [`%${keyword}%`, `%${keyword}%`];
+
+    db.query(sql, param, (err, results) => {
+        if (err) {
+            console.error('Query error:', err);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(results);
+    });
+});
+
 // Start the server
 app.listen(3000, () => {
     console.log('Server is running at port 3000');

@@ -49,7 +49,7 @@
             $('.pagination-container').html(''); // Clear pagination links
 
             $.ajax({
-                url: 'http://localhost:3000/search',
+                url: '/search',
                 method: 'GET',
                 data: { keyword: keyword },
                 success: function(response) {
@@ -72,7 +72,7 @@
             $('#product-container').html('<div class="text-center mt-3">Memuat...</div>');
 
             $.ajax({
-                url: 'http://localhost:3000/search',
+                url: '/search',
                 method: 'GET',
                 data: { keyword: keyword, page: page },
                 success: function(response) {
