@@ -10,7 +10,7 @@
 }
 .hero::before {
   content: "";
-  background: rgba(0,0,0,0.20); /* sedikit gelap supaya outline makin kontras */
+  background: rgba(0,0,0,0.20); 
   position: absolute;
   bottom: 0;
   top: 0;
@@ -24,25 +24,25 @@
 }
 .hero-content {
   display: inline-block;
-  background: rgba(0,0,0,0.10); /* opsional, untuk tambah kontras */
+  background: rgba(0,0,0,0.10); 
   border-radius: 12px;
   padding: 20px 0;
 }
-/* OUTLINE PUTIH TEBAL */
+
 .hero-title, .hero-title span, .hero-tagline {
   color: #1976d2;
   font-weight: 900;
   /* Outline putih nyata */
   text-shadow:
-    -3px -3px 0 #fff,
-     3px -3px 0 #fff,
-    -3px  3px 0 #fff,
-     3px  3px 0 #fff,
-    -3px  0px 0 #fff,
-     3px  0px 0 #fff,
-     0px  3px 0 #fff,
-     0px -3px 0 #fff,
-     0 0 12px #fff;
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+    -1px  0px 0 #fff,
+     1px  0px 0 #fff,
+     0px  1px 0 #fff,
+     0px -1px 0 #fff,
+     0 0 10px #fff;
 }
 .hero-title {
   font-size: 48px;
