@@ -11,18 +11,23 @@ class ReviewController extends Controller
 {
 
     public function index()
-    {
-        $purchasedProducts = auth()->user()->purchasedProducts();
+{
+    $purchasedProducts = auth()->user()->purchasedProducts();
 
-        $productsToReview = $purchasedProducts->filter(function ($product) {
-            return !Review::where('produk_id', $product['id'])
-                ->where('user_id', auth()->id())
-                ->exists();
-        });
+    $productsToReview = $purchasedProducts->filter(function ($product) {
+        return !Review::where('produk_id', $product['id'])
+            ->where('user_id', auth()->id())
+            ->exists();
+    });
 
-    return view('review', ['products' => $productsToReview]);
-    }
+    // Tambahkan baris berikut:
+    $reviews = Review::where('user_id', auth()->id())->with('produk')->latest()->get();
 
+    return view('review', [
+        'produk' => $productsToReview,
+        'reviews' => $reviews // <-- pastikan ini dikirim ke view
+    ]);
+}
     public function store(Request $request, $produkId)
     {
         $request->validate([
@@ -40,4 +45,26 @@ class ReviewController extends Controller
         return redirect('review')->with('success', 'Your comment has been added!');
     }
 
-}
+    public function edit($id)
+    {
+        $review = Review::findOrFail($id);
+        return view('review.edit', compact('review'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $review = Review::findOrFail($id);
+        $review->update($request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string'
+        ]));
+        return redirect()->route('review.index')->with('success', 'Review updated!');
+    }
+
+    public function destroy($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return redirect()->route('review.index')->with('success', 'Review deleted!');
+    }
+    }

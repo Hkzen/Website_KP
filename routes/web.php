@@ -38,6 +38,9 @@ Route::get('/about', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/review', [ReviewController::class, 'index'])->name('review.index');
     Route::post('/review/{produkId}', [ReviewController::class, 'store'])->name('review.store');
+    Route::get('/review/{review}/edit', [ReviewController::class, 'edit'])->name('review.edit');
+    Route::put('/review/{review}', [ReviewController::class, 'update'])->name('review.update');
+    Route::delete('/review/{review}', [ReviewController::class, 'destroy'])->name('review.destroy');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
